@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lottie Hero</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(133deg, #162d4f, #030b14);
+      color: white;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.4);
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* main container */
+    .media-stack {
+      position: relative;
+      width: min(90vmin, 2000px);
+      aspect-ratio: 1 / 1; /* 2000x2000 */
+    }
+
+    .media-stack video,
+    .media-stack #lottie {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .media-stack video {
+      object-fit: cover;
+      opacity: 1;
+      mix-blend-mode: screen;
+    }
+
+    #lottie {
+      pointer-events: none;
+    }
+
+    .content {
+      position: absolute;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: clamp(14px, 2vw, 18px);
+      opacity: 0.8;
+    }
+
+    #frost {
+      backdrop-filter: blur(10px);
+      opacity: .3;
+    }
+    /* not work */
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Alice Lottie Demo</h1>
+  </header>
+
+  <section class="hero">
+
+    <div class="media-stack">
+      <div id="animation"></div>
+      <video autoplay muted loop playsinline>
+        <source src="/alice-demo/earth-video.mp4" type="video/webm" />
+      </video>
+
+      
+    </div>
+
+   <!-- <div class="content">
+      <h2>Welcome</h2>
+      <p>Beautiful Earth Animation</p>
+    </div> -->
+
+  </section>
+
+  <script>
+
+    var animation = bodymovin.loadAnimation({
+    container: document.getElementById('animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'animation.json' // replace with your animation JSON file
+    });
+
+
+  </script>
+
+
+
+</body>
+</html>
