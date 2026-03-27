@@ -117,38 +117,35 @@
   </section>
 
   <script>
-    var animation = bodymovin.loadAnimation({
-    container: document.getElementById('animation'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: '/alice-demo/animation2.json' // replace with your animation JSON file
-    });
+const video = document.querySelector('video');
 
+const animation = lottie.loadAnimation({
+  container: document.getElementById('animation'),
+  renderer: 'svg',
+  loop: false,          // ❗ важливо
+  autoplay: false,      // ❗ важливо
+  path: '/alice-demo/animation2.json'
+});
+
+// коли Lottie готовий
 animation.addEventListener('DOMLoaded', () => {
 
-  function pauseAll() {
-    animation.stop();   // 🔴 ВАЖЛИВО: stop замість pause
-    video.pause();
+  function sync() {
+    if (!video.duration) return;
+
+    const progress = video.currentTime / video.duration;
+    const frame = progress * animation.totalFrames;
+
+    animation.goToAndStop(frame, true);
   }
 
-  function playAll() {
-    animation.play();
-    video.play();
-  }
+  // 🔥 головна синхронізація
+  video.addEventListener('timeupdate', sync);
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      pauseAll();
-    } else {
-      playAll();
-    }
-  });
-
-  // 🔥 fallback (деякі браузери)
-  window.addEventListener('blur', pauseAll);
-  window.addEventListener('focus', playAll);
-  });
+  // додатково — щоб миттєво ловити старт/стоп
+  video.addEventListener('play', sync);
+  video.addEventListener('seeked', sync);
+});
   </script>
 </body>
 </html>
