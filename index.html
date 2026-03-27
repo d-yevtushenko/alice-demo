@@ -54,7 +54,7 @@
     }
 
     .media-stack video,
-    .media-stack #lottie {
+    .media-stack #animation {
       position: absolute;
       top: 0;
       left: 0;
@@ -68,7 +68,7 @@
       mix-blend-mode: screen;
     }
 
-    #lottie {
+    #animation {
       pointer-events: none;
     }
 
@@ -105,23 +105,18 @@
   <section class="hero">
 
     <div class="media-stack">
-      
+      <div id="animation"></div>
       <video autoplay muted loop playsinline>
         <source src="/alice-demo/earth-video.webm" type="video/webm" />
       </video>
-      <div id="animation"></div>
-      
     </div>
-
    <!-- <div class="content">
       <h2>Welcome</h2>
       <p>Beautiful Earth Animation</p>
     </div> -->
-
   </section>
 
   <script>
-
     var animation = bodymovin.loadAnimation({
     container: document.getElementById('animation'),
     renderer: 'svg',
@@ -129,11 +124,6 @@
     autoplay: true,
     path: '/alice-demo/animation2.json' // replace with your animation JSON file
     });
-
-
   </script>
-
-
-
 </body>
 </html>
