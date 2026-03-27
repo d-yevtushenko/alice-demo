@@ -117,35 +117,13 @@
   </section>
 
   <script>
-const video = document.querySelector('video');
-
-const animation = lottie.loadAnimation({
-  container: document.getElementById('animation'),
-  renderer: 'svg',
-  loop: false,          // ❗ важливо
-  autoplay: false,      // ❗ важливо
-  path: '/alice-demo/animation2.json'
-});
-
-// коли Lottie готовий
-animation.addEventListener('DOMLoaded', () => {
-
-  function sync() {
-    if (!video.duration) return;
-
-    const progress = video.currentTime / video.duration;
-    const frame = progress * animation.totalFrames;
-
-    animation.goToAndStop(frame, true);
-  }
-
-  // 🔥 головна синхронізація
-  video.addEventListener('timeupdate', sync);
-
-  // додатково — щоб миттєво ловити старт/стоп
-  video.addEventListener('play', sync);
-  video.addEventListener('seeked', sync);
-});
+    var animation = bodymovin.loadAnimation({
+    container: document.getElementById('animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '/alice-demo/animation2.json' // replace with your animation JSON file
+    });
   </script>
 </body>
 </html>
