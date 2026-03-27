@@ -125,15 +125,29 @@
     path: '/alice-demo/animation2.json' // replace with your animation JSON file
     });
 
-    document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    animation.pause();
+animation.addEventListener('DOMLoaded', () => {
+
+  function pauseAll() {
+    animation.stop();   // 🔴 ВАЖЛИВО: stop замість pause
     video.pause();
-  } else {
+  }
+
+  function playAll() {
     animation.play();
     video.play();
   }
-});
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      pauseAll();
+    } else {
+      playAll();
+    }
+  });
+
+  // 🔥 fallback (деякі браузери)
+  window.addEventListener('blur', pauseAll);
+  window.addEventListener('focus', playAll);
   </script>
 </body>
 </html>
