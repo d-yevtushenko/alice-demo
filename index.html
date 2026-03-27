@@ -124,6 +124,16 @@
     autoplay: true,
     path: '/alice-demo/animation2.json' // replace with your animation JSON file
     });
+
+    document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    animation.pause();
+    video.pause();
+  } else {
+    animation.play();
+    video.play();
+  }
+});
   </script>
 </body>
 </html>
